@@ -1,0 +1,644 @@
+---
+import Base from "../layouts/Base.astro";
+import LeadForm from "../components/forms/LeadForm.astro";
+import "../styles/home.css";
+
+const DMOVE_CDN =
+  "https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2025/09";
+
+const carouselImages = [
+  {
+    src: "/images/eventos-1.webp",
+    alt: "Assessoria de marketing para espaço de eventos (1)",
+  },
+  {
+    src: "/images/eventos-2.webp",
+    alt: "Assessoria de marketing para espaço de eventos (2)",
+  },
+  {
+    src: "/images/eventos-3.webp",
+    alt: "Assessoria de marketing para espaço de eventos (3)",
+  },
+  {
+    src: "/images/eventos-4.webp",
+    alt: "Assessoria de marketing para espaço de eventos (4)",
+  },
+  {
+    src: "/images/eventos-5.webp",
+    alt: "Assessoria de marketing para espaço de eventos (5)",
+  },
+  {
+    src: "/images/eventos-6.webp",
+    alt: "Assessoria de marketing para espaço de eventos (6)",
+  },
+];
+
+// 30 logos de clientes (5 colunas × 6 linhas)
+const logoSlugs = [
+  "logos-dmove-lp_24",
+  "logos-dmove-lp_25",
+  "logos-dmove-lp_26",
+  "logos-dmove-lp_27",
+  "logos-dmove-lp_29",
+  "logos-dmove-lp_31",
+  "logos-dmove-lp_32",
+  "logos-dmove-lp_10",
+  "logos-dmove-lp_11",
+  "logos-dmove-lp_12",
+  "logos-dmove-lp_13",
+  "logos-dmove-lp_14",
+  "logos-dmove-lp_15",
+  "logos-dmove-lp_17",
+  "logos-dmove-lp_18",
+  "logos-dmove-lp_19",
+  "logos-dmove-lp_20",
+  "logos-dmove-lp_01",
+  "logos-dmove-lp_02",
+  "logos-dmove-lp_03",
+  "logos-dmove-lp_04",
+  "logos-dmove-lp_05",
+  "logos-dmove-lp_06",
+  "logos-dmove-lp_07",
+  "logos-dmove-lp_08",
+  "logos-dmove-lp_09",
+  "logos-dmove-lp_37",
+  "logos-dmove-lp_35",
+  "logos-dmove-lp_36",
+  "logos-dmove-lp_21",
+];
+
+// Vídeos de depoimentos via YouTube
+const ytVideos = [
+  {
+    id: "Mxv_LhMdBg8",
+    thumb: "https://dmove.com.br/wp-content/uploads/2024/01/5.webp",
+    label: "Depoimento 1",
+  },
+  {
+    id: "djxSxU5KWjA",
+    thumb: "https://dmove.com.br/wp-content/uploads/2024/01/3.webp",
+    label: "Depoimento 2",
+  },
+  {
+    id: "-jWraqL4YLM",
+    thumb: "https://dmove.com.br/wp-content/uploads/2024/01/2.webp",
+    label: "Depoimento 3",
+  },
+];
+
+import config from "../../config.json";
+const formCfg = config.forms["lead-form"];
+---
+
+<Base
+  title="Dmove — Líder em Marketing, Vendas e Tecnologia para Eventos"
+  description="A Dmove tem mais de 11 anos de experiência com espaços e fornecedores de eventos em todo o Brasil, aplicando estratégias que aumentam volume e ticket médio."
+  canonical="https://dmove.com.br/"
+>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__logo">
+        <a href="/">
+          <img
+            src="/images/logotipo.webp"
+            alt="Dmove"
+            width="250"
+            height="105"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </a>
+      </div>
+      <nav class="site-header__nav" aria-label="Menu principal">
+        <ul class="site-header__menu" id="main-menu">
+          <li><a href="/" aria-current="page">HOME</a></li>
+          <li><a href="https://dmove.com.br/blog/">BLOG</a></li>
+        </ul>
+        <button
+          class="site-header__burger"
+          id="menu-burger"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="main-menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero__video-bg" aria-hidden="true">
+      <video
+        autoplay
+        muted
+        playsinline
+        loop
+        preload="auto"
+        src="https://dmove.com.br/wp-content/uploads/2025/06/hero_16x9_dmove_v1_H.265.mp4#t=1"
+      ></video>
+    </div>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">
+        CONHEÇA A EMPRESA <b>LÍDER EM MARKETING, VENDAS E TECNOLOGIA</b> PARA O SETOR
+        DE EVENTOS
+      </h1>
+      <a href="#contatos" class="hero__btn">Quero mais informações</a>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO DOR ===== -->
+  <section class="dm-section sec-dor" aria-label="Por que a Dmove">
+    <div class="dm-container">
+      <div class="sec-dor__inner">
+        <!-- Bloco 1: Problema + imagem DM -->
+        <div class="sec-dor__row">
+          <div class="sec-dor__text">
+            <h2 class="sec-dor__title">
+              NÃO ESTÁ FELIZ COM O <b
+                >VOLUME E TICKET DOS EVENTOS DA AGENDA DO SEU ESPAÇO?</b
+              >
+            </h2>
+            <hr class="dm-divider" />
+            <p class="sec-dor__body">
+              A Dmove tem mais de <strong>11 anos de experiência</strong> com espaços
+              e fornecedores de eventos em todo o Brasil, aplicando estratégias que
+              <strong
+                >aumentam tanto o volume quanto o ticket médio em casamentos,
+                eventos sociais e corporativos.<br /><br />
+              </strong>
+              Não somos uma empresa de marketing genérica, nem freelancers sem vivência
+              no setor. <strong
+                >Atuamos exclusivamente no mercado de eventos</strong
+              >, com dados reais e estratégias comprovadas.<br /><br />
+              <strong
+                >E não existe milagre: conhecemos a estatística de conversão do
+                setor e sabemos exatamente quais resultados podem ser alcançados</strong
+              > com segurança e consistência.
+            </p>
+            <a href="#contatos" class="sec-dor__btn">Quero mais informações</a>
+          </div>
+          <div class="sec-dor__img">
+            <img
+              src="/images/dm.webp"
+              alt="Dmove"
+              width="853"
+              height="722"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <hr class="dm-divider--thin" />
+
+        <!-- Bloco 2: Crescimento digital + gráfico -->
+        <div class="sec-dor__row" style="flex-direction: row-reverse;">
+          <div class="sec-dor__text">
+            <h2 class="sec-dor__title">
+              <b><span style="color:#C3161C">CRESÇA NO DIGITAL</span></b><br />
+              COM INTELIGÊNCIA DE MERCADO EM EVENTOS
+            </h2>
+            <hr class="dm-divider" />
+            <p class="sec-dor__body">
+              Hoje a maioria dos espaços de eventos já utiliza o digital para
+              captar clientes, mas muitos não conseguem transformar esse esforço
+              em resultados consistentes. O problema não está em estar presente
+              no digital, e sim em como usar essa presença de forma estratégica.<br
+              /><br />
+              Com a abordagem correta, baseada em dados do setor e experiência real
+              de mercado, é possível atrair o público certo, aumentar o ticket médio
+              e transformar oportunidades em contratos assinados.<br /><br />
+              <strong
+                >A Dmove entrega crescimento sólido e mensurável, guiado por
+                inteligência de mercado.</strong
+              >
+            </p>
+          </div>
+          <div class="sec-dor__img sec-dor__img--graph">
+            <img
+              src="/images/grafico.webp"
+              alt="Gráfico de crescimento"
+              width="583"
+              height="428"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO POR QUÊ DMOVE ===== -->
+  <section
+    class="dm-section sec-porque"
+    aria-label="Por que a Dmove entende mais de eventos"
+  >
+    <div class="dm-container">
+      <div class="sec-porque__inner">
+        <!-- Linha: vídeo sticky + texto -->
+        <div class="sec-porque__row">
+          <div class="sec-porque__video-col">
+            <div class="sec-porque__video-wrap">
+              <video
+                src="https://dmove.com.br/wp-content/uploads/2026/03/DMOVE-FIXADO-01-v2.mp4"
+                controls
+                preload="metadata"
+                controlslist="nodownload"
+                style="width:100%;height:auto;display:block;"></video>
+            </div>
+          </div>
+          <div class="sec-porque__text-col">
+            <h2 class="sec-porque__title">
+              POR QUE A DMOVE <b>ENTENDE MAIS DE EVENTOS</b> DO QUE OUTRAS EMPRESAS?
+            </h2>
+            <hr class="dm-divider" />
+            <p class="sec-porque__body">
+              Antes de fundar a Dmove, nosso gestor executivo passou 8 anos
+              liderando equipes comerciais em grandes grupos de espaços de
+              eventos em São Paulo.<br /><br />
+              Nesse período, contratou diversas agências de marketing e viveu na
+              pele a frustração de investir sem ver resultados reais.<br /><br
+              />
+              Dessa experiência nasceu a Dmove: uma empresa criada por quem conhece
+              a rotina e os desafios do setor de eventos, com uma metodologia construída
+              a partir de dados e necessidades reais do mercado.
+            </p>
+          </div>
+        </div>
+
+        <hr class="dm-divider--thin" />
+
+        <!-- Sub: Estrutura robusta -->
+        <div class="sec-porque__sub">
+          <h2 class="sec-porque__sub-title">
+            ESTRUTURA ROBUSTA E PROFISSIONAIS <b
+              >ESPECIALIZADOS NO SETOR DE EVENTOS</b
+            >
+          </h2>
+          <hr class="dm-divider dm-divider--center" />
+          <p class="sec-porque__sub-text">
+            Tenha uma equipe profissional de marketing e vendas atuando no
+            crescimento do seu Espaço de Eventos.
+          </p>
+        </div>
+
+        <!-- Carrossel corredor -->
+        <div class="corredor" aria-label="Galeria de espaços de eventos">
+          <div class="corredor__track" id="corredor-track">
+            {
+              carouselImages.map((img) => (
+                <div class="corredor__slide">
+                  <img src={img.src} alt={img.alt} loading="lazy" />
+                </div>
+              ))
+            }
+            <!-- Duplicado para loop contínuo -->
+            {
+              carouselImages.map((img) => (
+                <div class="corredor__slide" aria-hidden="true">
+                  <img src={img.src} alt="" loading="lazy" />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:center;">
+          <a href="#form" class="sec-porque__btn">Quero mais informações</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO CASES ===== -->
+  <section class="dm-section sec-cases" aria-label="Cases de sucesso">
+    <div class="dm-container">
+      <div class="sec-cases__inner">
+        <!-- Linha: YouTube sticky + texto -->
+        <div class="sec-cases__row">
+          <div class="sec-cases__video-col">
+            <div class="sec-cases__yt-sticky" id="yt-main">
+              <div
+                class="yt-facade"
+                data-yt-id="TDJJabFU7MU"
+                role="button"
+                tabindex="0"
+                aria-label="Reproduzir vídeo institucional Dmove"
+              >
+                <img
+                  class="yt-facade__thumb"
+                  src="https://dmove.com.br/wp-content/uploads/2024/01/4.webp"
+                  alt="Cases de sucesso Dmove"
+                  loading="lazy"
+                />
+                <button
+                  class="yt-facade__play"
+                  aria-label="Reproduzir"
+                  type="button"
+                >
+                  <svg
+                    viewBox="0 0 80 80"
+                    width="72"
+                    height="72"
+                    aria-hidden="true"
+                  >
+                    <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,.55)"
+                    ></circle>
+                    <polygon points="32,22 62,40 32,58" fill="#fff"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="sec-cases__text-col">
+            <h2 class="sec-cases__title">
+              CONHEÇA ALGUNS<br />
+              <b><span>CASES DE SUCESSO</span></b>
+            </h2>
+            <hr class="dm-divider" />
+            <p class="sec-cases__body">
+              As empresas que têm acesso a nossa<br />metodologia alcançam
+              resultados incríveis.
+            </p>
+            <h3 class="sec-cases__subtitle">ESSE É O PODER DO MÉTODO DMOVE</h3>
+          </div>
+        </div>
+
+        <!-- Grade de 3 vídeos depoimento -->
+        <div class="sec-cases__grid">
+          {
+            ytVideos.map((v) => (
+              <div
+                class="yt-facade"
+                data-yt-id={v.id}
+                role="button"
+                tabindex="0"
+                aria-label={`Reproduzir: ${v.label}`}
+              >
+                <img
+                  class="yt-facade__thumb"
+                  src={v.thumb}
+                  alt={v.label}
+                  loading="lazy"
+                />
+                <button
+                  class="yt-facade__play"
+                  aria-label="Reproduzir"
+                  type="button"
+                >
+                  <svg
+                    viewBox="0 0 80 80"
+                    width="64"
+                    height="64"
+                    aria-hidden="true"
+                  >
+                    <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,.55)" />
+                    <polygon points="32,22 62,40 32,58" fill="#fff" />
+                  </svg>
+                </button>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERIA DE CLIENTES ===== -->
+  <section class="dm-section sec-galeria" aria-label="Clientes Dmove">
+    <div class="dm-container">
+      <div class="sec-galeria__inner">
+        <h2 class="sec-galeria__title">
+          ESSES NEGÓCIOS ESTÃO CRESCENDO COM A AJUDA<br />
+          <b>DA ASSESSORIA DE MARKETING DMOVE</b>
+        </h2>
+        <hr class="dm-divider dm-divider--center" style="width:8%;" />
+        <div
+          class="sec-galeria__grid"
+          role="list"
+          aria-label="Logos de clientes"
+        >
+          {
+            logoSlugs.map((slug) => (
+              <div
+                class="sec-galeria__item"
+                role="listitem"
+                style={`background-image:url('${DMOVE_CDN}/${slug}.png.webp')`}
+                aria-label="Logo de cliente"
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORMULÁRIO ===== -->
+  <section
+    class="dm-section sec-form"
+    id="contatos"
+    aria-label="Formulário de contato"
+  >
+    <div class="dm-container">
+      <div class="sec-form__inner">
+        <h2 class="sec-form__heading">ATENÇÃO</h2>
+        <hr class="dm-divider dm-divider--center" style="width:8%;" />
+        <p class="sec-form__sub">
+          COMO ENTENDER MELHOR OS SERVIÇOS <br /><b>OFERECIDOS PELA DMOVE?</b>
+        </p>
+
+        <div class="sec-form__layout">
+          <!-- Coluna vazia (decorativa no desktop) -->
+          <div class="sec-form__side"></div>
+
+          <!-- Coluna do formulário -->
+          <div class="sec-form__form-col" id="form">
+            <p class="sec-form__form-label">
+              Basta preencher o formulário abaixo que a nossa equipe vai entrar
+              em contato com você.
+            </p>
+            <LeadForm
+              formId="dmove-home"
+              project="dmove"
+              submitUrl={formCfg.webhooks[0]}
+              redirectUrl={formCfg.redirect_on_success}
+              submitText="Enviar solicitação"
+              honeypot={true}
+              successTitle="Solicitação recebida!"
+              successText="Recebemos seu pedido.<br>Em breve entraremos em contato."
+              fields={[
+                {
+                  name: "nome",
+                  type: "text",
+                  placeholder: "Nome:",
+                  required: true,
+                },
+                {
+                  name: "telefone",
+                  type: "text",
+                  placeholder: "Telefone/WhatsApp:",
+                  required: true,
+                },
+                {
+                  name: "email",
+                  type: "email",
+                  placeholder: "E-mail:",
+                  required: true,
+                },
+                {
+                  name: "empresa",
+                  type: "text",
+                  placeholder: "Empresa ou @ do Instagram:",
+                  required: true,
+                },
+                {
+                  name: "segmento",
+                  type: "select",
+                  placeholder: "",
+                  required: true,
+                  options: [
+                    {
+                      value: "",
+                      label: "Seu Segmento:",
+                      disabled: true,
+                      selected: true,
+                    },
+                    {
+                      value: "Espaço para eventos",
+                      label: "Espaço para eventos",
+                    },
+                    {
+                      value: "Empresa de serviços para eventos",
+                      label: "Empresa de serviços para eventos",
+                    },
+                    {
+                      value: "Hotel, bar ou restaurante que realiza eventos",
+                      label: "Hotel, bar ou restaurante que realiza eventos",
+                    },
+                    {
+                      value: "Casa de shows ou balada",
+                      label: "Casa de shows ou balada",
+                    },
+                    {
+                      value: "Agência de eventos",
+                      label: "Agência de eventos",
+                    },
+                    { value: "Outro", label: "Outro" },
+                  ],
+                },
+                {
+                  name: "faturamento",
+                  type: "select",
+                  placeholder: "",
+                  required: true,
+                  options: [
+                    {
+                      value: "",
+                      label: "Faturamento mensal da sua empresa?",
+                      disabled: true,
+                      selected: true,
+                    },
+                    { value: "Até 19 mil", label: "Até 19 mil" },
+                    { value: "20 a 49 mil", label: "20 a 49 mil" },
+                    { value: "50 a 69 mil", label: "50 a 69 mil" },
+                    { value: "70 a 99 mil", label: "70 a 99 mil" },
+                    { value: "100 a 499 mil", label: "100 a 499 mil" },
+                    {
+                      value: "500 mil a 1 milhão",
+                      label: "500 mil a 1 milhão",
+                    },
+                    { value: "Mais de 1 milhão", label: "Mais de 1 milhão" },
+                  ],
+                },
+                { name: "fonte", type: "hidden", value: "Landing page Dmove" },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" aria-label="Rodapé">
+    <div class="site-footer__inner">
+      <div class="site-footer__left">
+        <div class="site-footer__logo">
+          <img src="/images/selo.webp" alt="Dmove" width="72" height="72" loading="lazy" />
+        </div>
+        <p class="site-footer__tagline">Especialistas em marketing e vendas para eventos</p>
+      </div>
+      <div class="site-footer__right">
+        <p class="site-footer__text">Copyright © 2026 Todos os direitos reservados. Dmove Marketing</p>
+        <p class="site-footer__text">DMOVE ASSESSORIA E CONSULTORIA LTDA</p>
+        <p class="site-footer__text">CNPJ: 46.203.900/0001-19</p>
+      </div>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  // === Burger menu mobile ===
+  const header = document.getElementById("site-header");
+  const burger = document.getElementById("menu-burger");
+  burger?.addEventListener("click", () => {
+    const isOpen = header?.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // === UTM → hide menu ===
+  if (window.location.search.toLowerCase().includes("utm_")) {
+    document.body.classList.add("is-campaign");
+  }
+
+  // === YouTube façade ===
+  document.querySelectorAll<HTMLElement>(".yt-facade").forEach((facade) => {
+    const ytId = facade.dataset.ytId;
+    if (!ytId) return;
+    const activate = () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      facade.innerHTML = "";
+      facade.appendChild(iframe);
+    };
+    facade.querySelector("button")?.addEventListener("click", activate);
+    facade.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        activate();
+      }
+    });
+  });
+
+  // === Validação de telefone (não começar com 55) ===
+  document
+    .querySelectorAll<HTMLInputElement>('input[name="telefone"]')
+    .forEach((field) => {
+      const errorEl = document.createElement("div");
+      errorEl.style.cssText =
+        "color:red;font-size:14px;margin-top:5px;display:none;";
+      errorEl.textContent =
+        "Insira somente o DDD seguido do número do seu telefone.";
+      field.parentNode?.appendChild(errorEl);
+
+      const validate = () => {
+        const digits = field.value.replace(/\D/g, "");
+        const hasError = digits.startsWith("55");
+        errorEl.style.display = hasError ? "block" : "none";
+        const btn = field
+          .closest("form")
+          ?.querySelector<HTMLButtonElement>('[type="submit"]');
+        if (btn) btn.disabled = hasError;
+        return !hasError;
+      };
+      field.addEventListener("input", validate);
+    });
+</script>

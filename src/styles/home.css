@@ -1,0 +1,1387 @@
+/* ============================================================
+   HOME DMOVE — estilos extraídos do Elementor
+   ============================================================ */
+
+/* === Variáveis locais === */
+:root {
+  --dmove-red: #C3161C;
+  --dmove-red-hover: #990C11;
+  --dmove-white: #ffffff;
+  --dmove-black: #000000;
+  --dmove-footer-bg: #0E0604;
+  --container-w: 1200px;
+  --section-pad: 100px;
+}
+
+/* === Scrollbar personalizada === */
+html,
+body {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #202020;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ff0000;
+  border-radius: 10px;
+  border: 2px solid #202020;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #e60000;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+/* === Utilitário de seção === */
+.dm-section {
+  width: 100%;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.dm-container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* === Divider vermelho === */
+.dm-divider {
+  width: 15%;
+  height: 8px;
+  background: var(--dmove-red);
+  border: none;
+  margin: 20px 0;
+}
+
+.dm-divider--center {
+  margin: 20px auto;
+}
+
+.dm-divider--thin {
+  width: 100%;
+  height: 1px;
+  background: var(--dmove-red);
+  border: none;
+  margin: 64px 0;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 9999999;
+  background: #000000;
+  width: 100%;
+}
+
+.site-header__inner {
+  max-width: 1368px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-header__logo {
+  width: 27%;
+  flex-shrink: 0;
+}
+
+.site-header__logo img {
+  width: 70%;
+  height: auto;
+  display: block;
+}
+
+.site-header__nav {
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.site-header__menu {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header__menu a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.site-header__menu a:hover {
+  color: #BF0404;
+}
+
+/* Burger mobile */
+.site-header__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 20px 0;
+}
+
+.site-header__burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Ocultar nav quando UTM presente */
+body.is-campaign .site-header__nav {
+  display: none !important;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+.hero__video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.62) 68%);
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 0 40px;
+  max-width: 750px;
+  margin-left: max(0px, calc((100vw - var(--container-w)) / 2));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.hero__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+}
+
+.hero__title b {
+  font-weight: 700;
+}
+
+.hero__btn {
+  display: inline-block;
+  background: var(--dmove-red);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 25px 40px;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.hero__btn:hover {
+  background: var(--dmove-red-hover);
+}
+
+/* ============================================================
+   SEÇÃO DOR  (BG: Dmove-BG_02.jpg)
+   ============================================================ */
+.sec-dor {
+  background-image: url('https://dmove.com.br/wp-content/uploads/2024/01/Dmove-BG_02.jpg');
+  padding: var(--section-pad) 0;
+  overflow: hidden;
+}
+
+.sec-dor__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.sec-dor__row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Bloco 1: texto ocupa ~42%, imagem ocupa ~54% */
+.sec-dor__text {
+  flex: 0 0 45%;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sec-dor__img {
+  flex: 0 0 54%;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.sec-dor__img img {
+  width: 100%;
+  max-width: 100%;
+  margin-right: 0%;
+}
+
+/* Bloco 2 (gráfico): proporções diferentes */
+.sec-dor__img--graph {
+  flex: 0 0 55%;
+  overflow: hidden;
+}
+
+.sec-dor__img--graph img {
+  width: 100%;
+  max-width: 100%;
+  margin-right: 0;
+}
+
+.sec-dor__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sec-dor__title b {
+  font-weight: 700;
+}
+
+.sec-dor__body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0;
+}
+
+.sec-dor__body strong {
+  font-weight: 700;
+}
+
+.sec-dor__btn {
+  display: inline-block;
+  background: var(--dmove-red);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 25px 40px;
+  margin-top: 20px;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.sec-dor__btn:hover {
+  background: var(--dmove-red-hover);
+}
+
+/* ============================================================
+   SEÇÃO POR QUÊ DMOVE  (BG: Dmove-BG_03.jpg)
+   ============================================================ */
+.sec-porque {
+  background-image: url('https://dmove.com.br/wp-content/uploads/2024/01/Dmove-BG_03.jpg');
+  padding: var(--section-pad) 0;
+}
+
+.sec-porque__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Texto à esquerda, vídeo à direita (row-reverse: vídeo no HTML vem depois) */
+.sec-porque__row {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.sec-porque__video-col {
+  width: 28%;
+  flex-shrink: 0;
+}
+
+.sec-porque__video-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  position: sticky;
+  top: 24px;
+}
+
+.sec-porque__video-wrap video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sec-porque__text-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sec-porque__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #ffffff;
+  max-width: 500px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sec-porque__title b {
+  font-weight: 700;
+}
+
+.sec-porque__body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Sub: estrutura robusta */
+.sec-porque__sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.sec-porque__sub-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #ffffff;
+  text-align: center;
+  max-width: 74%;
+  margin: 0;
+}
+
+.sec-porque__sub-title b {
+  font-weight: 700;
+}
+
+.sec-porque__sub-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #ffffff;
+  text-align: center;
+  max-width: 48%;
+  margin: 0;
+}
+
+.sec-porque__btn {
+  display: inline-block;
+  background: var(--dmove-red);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 25px 40px;
+  transition: background 0.2s;
+}
+
+.sec-porque__btn:hover {
+  background: var(--dmove-red-hover);
+}
+
+/* === Carrossel corredor === */
+.corredor {
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.corredor__track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: corredor-scroll 40s linear infinite;
+}
+
+/* hover pause removido — carrossel sempre corre */
+.corredor__slide {
+  flex-shrink: 0;
+  width: 367px;
+}
+
+.corredor__slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  display: block;
+}
+
+@keyframes corredor-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   SEÇÃO CASES  (BG: Dmove-BG_04.jpg)
+   ============================================================ */
+.sec-cases {
+  background-image: url('https://dmove.com.br/wp-content/uploads/2024/01/Dmove-BG_04.jpg');
+  padding: var(--section-pad) 0;
+}
+
+.sec-cases__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* Texto à esquerda, vídeo à direita */
+.sec-cases__row {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.sec-cases__video-col {
+  width: 50%;
+  flex-shrink: 0;
+}
+
+.sec-cases__yt-sticky {
+  position: sticky;
+  top: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.sec-cases__text-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sec-cases__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0;
+  max-width: 73%;
+}
+
+.sec-cases__title b {
+  font-weight: 700;
+}
+
+.sec-cases__title span {
+  color: var(--dmove-red);
+}
+
+.sec-cases__body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0;
+  max-width: 78%;
+}
+
+.sec-cases__subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 32px 0 0;
+}
+
+/* Grade de 3 vídeos */
+.sec-cases__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* YouTube façade */
+.yt-facade {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.yt-facade__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.yt-facade:hover .yt-facade__thumb {
+  opacity: 0.85;
+}
+
+.yt-facade__play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.yt-facade__play svg {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .6));
+  transition: transform 0.15s;
+}
+
+.yt-facade:hover .yt-facade__play svg {
+  transform: scale(1.1);
+}
+
+.yt-facade iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ============================================================
+   SEÇÃO GALERIA  (BG: Dmove-BG_05.jpg)
+   ============================================================ */
+.sec-galeria {
+  background-image: url('https://dmove.com.br/wp-content/uploads/2024/01/Dmove-BG_05.jpg');
+  padding: var(--section-pad) 0;
+}
+
+.sec-galeria__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.sec-galeria__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  max-width: 77%;
+  margin: 0;
+}
+
+.sec-galeria__title b {
+  font-weight: 700;
+}
+
+.sec-galeria__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  width: 100%;
+}
+
+.sec-galeria__item {
+  aspect-ratio: 1/1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  transition: opacity 0.35s;
+}
+
+.sec-galeria__item:hover {
+  opacity: 0.85;
+}
+
+/* ============================================================
+   SEÇÃO FORMULÁRIO  (BG: Dmove-BG_13.png)
+   ============================================================ */
+.sec-form {
+  background-image: url('/images/Dmove-BG_13.png');
+  background-size: auto 100%;
+  background-position: top left;
+  padding: var(--section-pad) 0;
+}
+
+.sec-form__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.sec-form__heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--dmove-red);
+  text-align: center;
+  margin: 0;
+}
+
+.sec-form__sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: 200;
+  color: #ffffff;
+  text-align: center;
+  max-width: 574px;
+  margin: 0;
+}
+
+.sec-form__sub b {
+  font-weight: 700;
+}
+
+.sec-form__layout {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.sec-form__side {
+  flex: 1;
+}
+
+.sec-form__form-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sec-form__form-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: #ffffff;
+  max-width: 76%;
+}
+
+/* Sobrescreve o lead-form para o estilo Dmove */
+#form-dmove-home {
+  max-width: 100%;
+}
+
+#form-dmove-home .lead-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+#form-dmove-home .form-group {
+  display: contents;
+}
+
+#form-dmove-home .form-input,
+#form-dmove-home .form-select,
+#form-dmove-home .form-textarea {
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  color: #333333;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 14px 16px;
+  width: 100%;
+}
+
+#form-dmove-home .form-input:focus,
+#form-dmove-home .form-select:focus {
+  outline: 2px solid var(--dmove-red);
+}
+
+#form-dmove-home .form-submit {
+  background: var(--dmove-red);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  padding: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+  margin-top: 4px;
+}
+
+#form-dmove-home .form-submit:hover {
+  background: var(--dmove-red-hover);
+}
+
+#form-dmove-home .form-footer {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#form-dmove-home .form-success-state {
+  color: #fff;
+}
+
+#form-dmove-home .form-success-title {
+  color: #fff;
+}
+
+#form-dmove-home .form-success-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Esconde honeypot */
+.hp-field {
+  display: none !important;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--dmove-footer-bg);
+  padding: 0;
+}
+
+.site-footer__inner {
+  max-width: 1368px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* Esquerda: selo + especialistas */
+.site-footer__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.site-footer__logo {
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.site-footer__logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.site-footer__tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0;
+  max-width: 200px;
+  line-height: 1.4;
+}
+
+/* Direita: copyright em coluna */
+.site-footer__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.site-footer__text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0;
+  text-align: right;
+}
+
+/* ============================================================
+   RESPONSIVO — TABLET  (≤ 1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .dm-container {
+    padding: 0 24px;
+  }
+
+  /* --- Header --- */
+  .site-header__inner {
+    padding: 0 24px;
+  }
+
+  .site-header__logo img {
+    width: 55%;
+  }
+
+  .site-header__menu {
+    gap: 20px;
+  }
+
+  .site-header__menu a {
+    font-size: 13px;
+  }
+
+  /* --- Hero --- */
+  .hero__content {
+    padding: 0 24px;
+    max-width: 580px;
+  }
+
+  .hero__title {
+    font-size: 36px;
+  }
+
+  .hero__btn {
+    font-size: 15px;
+    padding: 20px 32px;
+  }
+
+  /* --- Dor: mantém row, reduz proporções e fontes --- */
+  .sec-dor__row {
+    gap: 32px;
+  }
+
+  .sec-dor__text {
+    flex: 0 0 58%;
+    max-width: 58%;
+  }
+
+  .sec-dor__img {
+    flex: 0 0 42%;
+  }
+
+  .sec-dor__img--graph {
+    flex: 0 0 42%;
+  }
+
+  .sec-dor__title {
+    font-size: 24px;
+  }
+
+  .sec-dor__body {
+    font-size: 16px;
+  }
+
+  .sec-dor__btn {
+    font-size: 15px;
+    padding: 18px 28px;
+  }
+
+  /* --- Por que Dmove: mantém row, reduz fontes --- */
+  .sec-porque__inner {
+    gap: 48px;
+  }
+
+  .sec-porque__title {
+    font-size: 24px;
+  }
+
+  .sec-porque__body {
+    font-size: 16px;
+  }
+
+  .sec-porque__sub-title {
+    font-size: 24px;
+    max-width: 80%;
+  }
+
+  .sec-porque__sub-text {
+    font-size: 16px;
+    max-width: 80%;
+  }
+
+  .sec-porque__btn {
+    font-size: 15px;
+    padding: 18px 28px;
+  }
+
+  /* --- Cases: mantém row, reduz fontes --- */
+  .sec-cases__inner {
+    gap: 48px;
+  }
+
+  .sec-cases__title {
+    font-size: 24px;
+    max-width: 100%;
+  }
+
+  .sec-cases__body {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .sec-cases__subtitle {
+    font-size: 20px;
+  }
+
+  .sec-cases__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  /* --- Galeria --- */
+  .sec-galeria__title {
+    font-size: 26px;
+    max-width: 90%;
+  }
+
+  .sec-galeria__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* --- Formulário: mantém layout desktop --- */
+  .sec-form {
+    background-position: center center;
+  }
+
+  .sec-form__heading {
+    font-size: 42px;
+  }
+
+  .sec-form__sub {
+    font-size: 20px;
+  }
+
+  .sec-form__form-label {
+    font-size: 18px;
+    max-width: 100%;
+  }
+
+  /* --- Footer --- */
+  .site-footer__inner {
+    padding: 32px 40px;
+  }
+
+  .site-footer__right {
+    align-items: flex-end;
+  }
+}
+
+/* ============================================================
+   RESPONSIVO — MOBILE  (≤ 767px)
+   ============================================================ */
+@media (max-width: 767px) {
+  :root {
+    --section-pad: 64px;
+  }
+
+  .dm-container {
+    padding: 0 20px;
+  }
+
+  /* --- Header --- */
+  .site-header__inner {
+    padding: 0 20px;
+  }
+
+  .site-header__logo {
+    width: auto;
+  }
+
+  .site-header__logo img {
+    width: 130px;
+  }
+
+  .site-header__nav {
+    width: auto;
+  }
+
+  .site-header__menu {
+    display: none;
+  }
+
+  .site-header__burger {
+    display: flex;
+  }
+
+  .site-header.is-open .site-header__menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999998;
+    gap: 32px;
+  }
+
+  .site-header.is-open .site-header__menu a {
+    font-size: 24px;
+  }
+
+  /* --- Hero --- */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    justify-content: center;
+    padding: 100px 0 60px;
+  }
+
+  .hero__content {
+    padding: 0 20px;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .hero__title {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .hero__btn {
+    font-size: 15px;
+    padding: 18px 28px;
+    align-self: center;
+  }
+
+  /* --- Dor --- */
+  /* sec-dor fica na posição normal; a imagem usa margin negativo para
+     sobrepor o hero sem mover o background da seção */
+  .sec-dor {
+    padding: 0 0 64px;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sec-dor__inner {
+    gap: 48px;
+  }
+
+  .sec-dor__row {
+    flex-direction: column !important;
+    gap: 0;
+  }
+
+  .sec-dor__text {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 24px 0;
+  }
+
+  /* Imagem DM: aparece primeiro e sobe para dentro do hero */
+  .sec-dor__img:not(.sec-dor__img--graph) {
+    order: -1;
+    flex: 1 1 100%;
+    overflow: visible;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    margin-top: -15vw;
+    /* imagem sobe ~15% da largura para dentro do hero */
+  }
+
+  .sec-dor__img img {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  /* Gráfico: fica na posição normal, sem subir */
+  .sec-dor__img--graph {
+    order: 0;
+    flex: 1 1 100%;
+    overflow: hidden;
+    margin-top: 0;
+  }
+
+  .sec-dor__title {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .sec-dor__body {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .sec-dor__btn {
+    align-self: center;
+    font-size: 15px;
+    padding: 18px 28px;
+  }
+
+  .dm-divider {
+    width: 20%;
+    margin: 16px auto;
+  }
+
+  .dm-divider--thin {
+    margin: 40px 0;
+  }
+
+  /* --- Por que Dmove --- */
+  .sec-porque {
+    padding: var(--section-pad) 0;
+  }
+
+  .sec-porque__inner {
+    gap: 40px;
+  }
+
+  .sec-porque__row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sec-porque__video-col {
+    width: 100%;
+  }
+
+  .sec-porque__video-wrap {
+    position: static;
+    border-radius: 8px;
+  }
+
+  /* Vídeo: proporção natural do arquivo (sem forçar aspect-ratio) */
+  .sec-porque__video-wrap video {
+    width: 100%;
+    height: auto;
+  }
+
+  .sec-porque__title {
+    font-size: 22px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .sec-porque__body {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .sec-porque__sub-title {
+    font-size: 22px;
+    max-width: 100%;
+  }
+
+  .sec-porque__sub-text {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .sec-porque__btn {
+    font-size: 15px;
+    padding: 18px 28px;
+  }
+
+  .corredor__slide {
+    width: 300px;
+  }
+
+  /* --- Cases --- */
+  .sec-cases {
+    padding: var(--section-pad) 0;
+  }
+
+  .sec-cases__inner {
+    gap: 40px;
+  }
+
+  .sec-cases__row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sec-cases__video-col {
+    width: 100%;
+  }
+
+  .sec-cases__yt-sticky {
+    position: static;
+  }
+
+  .sec-cases__title {
+    font-size: 22px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .sec-cases__body {
+    font-size: 16px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .sec-cases__subtitle {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .sec-cases__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* --- Galeria --- */
+  .sec-galeria {
+    padding: var(--section-pad) 0;
+  }
+
+  .sec-galeria__title {
+    font-size: 22px;
+    max-width: 100%;
+  }
+
+  .sec-galeria__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  /* --- Formulário --- */
+  .sec-form {
+    padding: var(--section-pad) 0;
+    background-position: top right;
+  }
+
+  .sec-form__layout {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .sec-form__side {
+    display: none;
+  }
+
+  .sec-form__heading {
+    font-size: 32px;
+  }
+
+  .sec-form__sub {
+    font-size: 18px;
+    max-width: 100%;
+  }
+
+  .sec-form__form-label {
+    font-size: 16px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* --- Footer --- */
+  .site-footer__inner {
+    padding: 32px 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Logo e tagline lado a lado no mobile */
+  .site-footer__left {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .site-footer__tagline {
+    text-align: left;
+    max-width: 180px;
+    font-size: 14px;
+  }
+
+  .site-footer__right {
+    align-items: center;
+    gap: 4px;
+  }
+
+  .site-footer__text {
+    text-align: center;
+    font-size: 13px;
+  }
+}
