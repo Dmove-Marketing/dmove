@@ -2,9 +2,9 @@
   "project_name": "dmove",
   "project_slug": "dmove",
   "client": "Dmove",
-  "environment": "development",
+  "environment": "production",
   "tracking": {
-    "gtm_id": "GTM-5TNJDS69",
+    "gtm_id": "GTM-PBSKCSW9",
     "enabled": true
   },
   "forms": {
