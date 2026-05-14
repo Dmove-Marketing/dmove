@@ -1,36 +1,27 @@
 ---
 import Base from "../layouts/Base.astro";
 import LeadForm from "../components/forms/LeadForm.astro";
+import { Image } from "astro:assets";
 import "../styles/home.css";
 
 const DMOVE_CDN =
   "https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2025/09";
 
+// Importações estáticas para o Astro otimizar (redimensionar de 2560→800px)
+import eventos1 from "../assets/images/eventos-1.webp";
+import eventos2 from "../assets/images/eventos-2.webp";
+import eventos3 from "../assets/images/eventos-3.webp";
+import eventos4 from "../assets/images/eventos-4.webp";
+import eventos5 from "../assets/images/eventos-5.webp";
+import eventos6 from "../assets/images/eventos-6.webp";
+
 const carouselImages = [
-  {
-    src: "/images/eventos-1.webp",
-    alt: "Assessoria de marketing para espaço de eventos (1)",
-  },
-  {
-    src: "/images/eventos-2.webp",
-    alt: "Assessoria de marketing para espaço de eventos (2)",
-  },
-  {
-    src: "/images/eventos-3.webp",
-    alt: "Assessoria de marketing para espaço de eventos (3)",
-  },
-  {
-    src: "/images/eventos-4.webp",
-    alt: "Assessoria de marketing para espaço de eventos (4)",
-  },
-  {
-    src: "/images/eventos-5.webp",
-    alt: "Assessoria de marketing para espaço de eventos (5)",
-  },
-  {
-    src: "/images/eventos-6.webp",
-    alt: "Assessoria de marketing para espaço de eventos (6)",
-  },
+  { src: eventos1, alt: "Assessoria de marketing para espaço de eventos (1)" },
+  { src: eventos2, alt: "Assessoria de marketing para espaço de eventos (2)" },
+  { src: eventos3, alt: "Assessoria de marketing para espaço de eventos (3)" },
+  { src: eventos4, alt: "Assessoria de marketing para espaço de eventos (4)" },
+  { src: eventos5, alt: "Assessoria de marketing para espaço de eventos (5)" },
+  { src: eventos6, alt: "Assessoria de marketing para espaço de eventos (6)" },
 ];
 
 // 30 logos de clientes (5 colunas × 6 linhas)
@@ -293,7 +284,7 @@ const formCfg = config.forms["lead-form"];
             {
               carouselImages.map((img) => (
                 <div class="corredor__slide">
-                  <img src={img.src} alt={img.alt} loading="lazy" />
+                  <Image src={img.src} alt={img.alt} width={800} height={534} loading="lazy" />
                 </div>
               ))
             }
@@ -301,7 +292,7 @@ const formCfg = config.forms["lead-form"];
             {
               carouselImages.map((img) => (
                 <div class="corredor__slide" aria-hidden="true">
-                  <img src={img.src} alt="" loading="lazy" />
+                  <Image src={img.src} alt="" width={800} height={534} loading="lazy" />
                 </div>
               ))
             }
