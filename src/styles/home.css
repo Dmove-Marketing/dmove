@@ -897,12 +897,9 @@ body.is-campaign .site-header__nav {
     width: 55%;
   }
 
-  .site-header__menu {
-    gap: 20px;
-  }
-
-  .site-header__menu a {
+  .site-header__cta {
     font-size: 13px;
+    padding: 9px 16px;
   }
 
   /* --- Hero --- */
@@ -1055,43 +1052,32 @@ body.is-campaign .site-header__nav {
 
   /* --- Header --- */
   .site-header__inner {
-    padding: 0 20px;
+    padding: 0 16px;
+    gap: 12px;
   }
 
   .site-header__logo {
     width: auto;
+    flex-shrink: 1;
+    min-width: 0;
   }
 
   .site-header__logo img {
-    width: 130px;
+    width: clamp(90px, 30vw, 130px);
   }
 
   .site-header__nav {
     width: auto;
+    flex-shrink: 0;
   }
 
-  .site-header__menu {
-    display: none;
-  }
-
-  .site-header__burger {
-    display: flex;
-  }
-
-  .site-header.is-open .site-header__menu {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    inset: 0;
-    background: #000;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999998;
-    gap: 32px;
-  }
-
-  .site-header.is-open .site-header__menu a {
-    font-size: 24px;
+  .site-header__cta {
+    font-size: 11px;
+    padding: 9px 14px;
+    letter-spacing: 0;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
   }
 
   /* --- Hero --- */
