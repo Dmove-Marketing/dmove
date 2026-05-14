@@ -1,9 +1,31 @@
+function applyPhoneMask(input: HTMLInputElement) {
+  input.addEventListener('input', () => {
+    let v = input.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.slice(0, 11);
+    if (v.length > 7) {
+      v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+    } else if (v.length > 2) {
+      v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+    } else if (v.length > 0) {
+      v = `(${v}`;
+    }
+    input.value = v;
+  });
+}
+
 export function initForms() {
   const forms = document.querySelectorAll<HTMLFormElement>('form[data-form-id]');
   forms.forEach((form) => {
+    // Prevent double-initialization
+    if ((form as any).__formsInitialized) return;
+    (form as any).__formsInitialized = true;
+
     let started = false;
     const formId  = form.dataset.formId!;
     const project = form.dataset.project || window.location.hostname;
+
+    // Phone mask
+    form.querySelectorAll<HTMLInputElement>('[name="telefone"]').forEach(applyPhoneMask);
     
     const apiUrl  = form.dataset.apiUrl ?? '';
     const submitUrl = form.dataset.submitUrl || (apiUrl ? `${apiUrl}/submit` : null);
@@ -127,11 +149,3 @@ export function initForms() {
   });
 }
 
-// Auto-initialize if imported directly in client scripts
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initForms);
-  } else {
-    initForms();
-  }
-}

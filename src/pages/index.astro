@@ -138,7 +138,7 @@ const formCfg = config.forms["lead-form"];
         muted
         playsinline
         loop
-        preload="auto"
+        preload="none"
         src="https://dmove.com.br/wp-content/uploads/2025/06/hero_16x9_dmove_v1_H.265.mp4#t=1"
       ></video>
     </div>
@@ -591,10 +591,6 @@ const formCfg = config.forms["lead-form"];
     burger.setAttribute("aria-expanded", String(isOpen));
   });
 
-  // === UTM → hide menu ===
-  if (window.location.search.toLowerCase().includes("utm_")) {
-    document.body.classList.add("is-campaign");
-  }
 
   // === YouTube façade ===
   document.querySelectorAll<HTMLElement>(".yt-facade").forEach((facade) => {

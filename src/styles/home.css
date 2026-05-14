@@ -170,6 +170,7 @@ body.is-campaign .site-header__nav {
   flex-direction: column;
   justify-content: space-evenly;
   overflow: hidden;
+  background-color: #000;
 }
 
 .hero__video-bg {
@@ -811,6 +812,16 @@ body.is-campaign .site-header__nav {
 
 #form-dmove-home .form-success-state {
   color: #fff;
+  width: 100%;
+  min-height: 420px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#form-dmove-home .form-success-state.active {
+  display: flex;
 }
 
 #form-dmove-home .form-success-title {
