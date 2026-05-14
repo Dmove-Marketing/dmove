@@ -1,59 +1,100 @@
 ---
-// src/components/tracking/UTMCapture.astro
-// Captura UTMs, click IDs e referrer da URL e salva em sessionStorage
-// Dados são enviados junto com cada formulário para atribuição de campanhas
 ---
 
 <script>
   (function() {
     const params = new URLSearchParams(window.location.search);
 
-    // UTM params padrão
-    const utmKeys = [
-      'utm_source', 'utm_medium', 'utm_campaign',
-      'utm_content', 'utm_term'
-    ];
+    function getCookie(name: string): string {
+      const escaped = name.replace(/([.*+?^${}()|[\]\\])/g, '\\$1');
+      const m = document.cookie.match(new RegExp('(?:^|; )' + escaped + '=([^;]*)'));
+      if (!m) return '';
+      try { return decodeURIComponent(m[1]); } catch { return m[1]; }
+    }
 
-    // Click IDs (Google Ads, Meta, TikTok, Bing, etc.)
-    const clickIdKeys = ['gclid', 'fbclid', 'sck', 'ttclid', 'msclkid'];
+    // Lê de URL primeiro, cai para cookie se não tiver
+    function fromUrlOrCookie(urlKey: string, cookieKey?: string): string {
+      return params.get(urlKey) || getCookie(cookieKey ?? urlKey) || '';
+    }
 
     const trackingData: Record<string, string> = {};
 
-    // Capturar UTMs
-    utmKeys.forEach(key => {
-      const value = params.get(key);
-      if (value) trackingData[key] = value;
+    // UTMs — URL tem prioridade, fallback em cookie
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
+      const v = fromUrlOrCookie(k);
+      if (v) trackingData[k] = v;
     });
 
-    // Capturar click IDs
-    clickIdKeys.forEach(key => {
-      const value = params.get(key);
-      if (value) trackingData[key] = value;
+    // Google click IDs
+    const gclid = fromUrlOrCookie('gclid', 'gclid') || getCookie('__gclid');
+    if (gclid) trackingData['gclid'] = gclid;
+
+    const gbraid = fromUrlOrCookie('gbraid', 'gbraid') || getCookie('__gbraid');
+    if (gbraid) trackingData['gbraid'] = gbraid;
+
+    const wbraid = fromUrlOrCookie('wbraid', 'wbraid') || getCookie('__wbraid');
+    if (wbraid) trackingData['wbraid'] = wbraid;
+
+    // Meta IDs
+    const fbclid = fromUrlOrCookie('fbclid');
+    if (fbclid) trackingData['fbclid'] = fbclid;
+
+    const fbc = getCookie('_fbc');
+    if (fbc) trackingData['fbc'] = fbc;
+
+    const fbp = getCookie('_fbp');
+    if (fbp) trackingData['fbp'] = fbp;
+
+    // Outros click IDs de URL
+    ['sck', 'ttclid', 'msclkid'].forEach(k => {
+      const v = params.get(k);
+      if (v) trackingData[k] = v;
     });
 
-    // Referrer (só externo)
+    // External ID (Meta CAPI)
+    const extId = getCookie('external_id') || getCookie('_external_id');
+    if (extId) trackingData['external_id'] = extId;
+
+    // Event ID para deduplicação Meta CAPI (preenchido pelo GTM em window.__page_event_id)
+    const eventId = (window as any).__page_event_id;
+    if (eventId) trackingData['event_id'] = String(eventId);
+
+    // Referrer externo
     if (document.referrer && !document.referrer.includes(window.location.hostname)) {
       trackingData['referrer'] = document.referrer;
     }
 
-    // Landing page
     trackingData['landing_page'] = window.location.pathname;
     trackingData['landing_url'] = window.location.href.split('?')[0];
 
-    // Timestamp da primeira visita na sessão
     if (!sessionStorage.getItem('dmove_first_visit')) {
       sessionStorage.setItem('dmove_first_visit', new Date().toISOString());
     }
 
-    // Salvar em sessionStorage (só se tiver dados novos de UTM/click)
-    const hasNewParams = utmKeys.some(k => trackingData[k]) || clickIdKeys.some(k => trackingData[k]);
-    if (hasNewParams) {
+    // Salva se tiver qualquer dado de campanha
+    const hasCampaignData = ['utm_source','gclid','gbraid','wbraid','fbclid','fbc','fbp','sck','ttclid','msclkid','external_id'].some(k => trackingData[k]);
+    if (hasCampaignData) {
       sessionStorage.setItem('dmove_tracking', JSON.stringify(trackingData));
     }
 
-    // Push para DataLayer
-    (window as any).dataLayer = (window as any).dataLayer || [];
-    (window as any).dataLayer.push({
+    // Reaplica event_id quando GTM empurrar page_event_id_ready
+    const dl = (window as any).dataLayer = (window as any).dataLayer || [];
+    const origPush = dl.push.bind(dl);
+    dl.push = function(...args: any[]) {
+      const result = origPush(...args);
+      try {
+        const arg = args[0] || {};
+        if (arg.event === 'page_event_id_ready' && arg.event_id) {
+          const stored = sessionStorage.getItem('dmove_tracking');
+          const data = stored ? JSON.parse(stored) : {};
+          data['event_id'] = String(arg.event_id);
+          sessionStorage.setItem('dmove_tracking', JSON.stringify(data));
+        }
+      } catch {}
+      return result;
+    };
+
+    dl.push({
       event: 'page_meta',
       page_path: window.location.pathname,
       ...trackingData

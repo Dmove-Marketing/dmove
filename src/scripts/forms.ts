@@ -97,11 +97,19 @@ export function initForms() {
       // Construir Fonte: valor do campo + parâmetros de tracking como query string
       const trackingParamKeys = [
         'utm_source', 'utm_medium', 'utm_campaign', 'utm_term',
-        'utm_content', 'utm_id', 'gclid', 'fbclid', 'ttclid', 'msclkid', 'sck',
+        'utm_content', 'utm_id', 'gclid', 'gbraid', 'wbraid',
+        'fbclid', 'ttclid', 'msclkid', 'sck',
       ];
       const qs = new URLSearchParams();
       trackingParamKeys.forEach(k => { if (tracking[k]) qs.set(k, tracking[k]); });
       const fonte = qs.toString() ? `${fonteBase}?${qs.toString()}` : fonteBase;
+
+      // Campos Meta CAPI — enviados separados para uso no n8n (Conversions API)
+      const metaCapi: Record<string, string> = {};
+      if (tracking['fbc'])         metaCapi['fbc']         = tracking['fbc'];
+      if (tracking['fbp'])         metaCapi['fbp']         = tracking['fbp'];
+      if (tracking['external_id']) metaCapi['external_id'] = tracking['external_id'];
+      if (tracking['event_id'])    metaCapi['event_id']    = tracking['event_id'];
 
       // Payload flat no formato esperado pelo n8n
       const payload: Record<string, string> = {
@@ -115,6 +123,7 @@ export function initForms() {
         'Desenvolvido por': 'Dmove',
         form_id: formId,
         form_name: formId,
+        ...metaCapi,
       };
 
       try {
