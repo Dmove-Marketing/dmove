@@ -102,21 +102,7 @@ const formCfg = config.forms["lead-form"];
         </a>
       </div>
       <nav class="site-header__nav" aria-label="Menu principal">
-        <ul class="site-header__menu" id="main-menu">
-          <li><a href="/" aria-current="page">HOME</a></li>
-          <li><a href="https://dmove.com.br/blog/">BLOG</a></li>
-        </ul>
-        <button
-          class="site-header__burger"
-          id="menu-burger"
-          aria-label="Abrir menu"
-          aria-expanded="false"
-          aria-controls="main-menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <a href="#contatos" class="site-header__cta">Quero mais informações</a>
       </nav>
     </div>
   </header>
@@ -574,15 +560,6 @@ const formCfg = config.forms["lead-form"];
 </Base>
 
 <script>
-  // === Burger menu mobile ===
-  const header = document.getElementById("site-header");
-  const burger = document.getElementById("menu-burger");
-  burger?.addEventListener("click", () => {
-    const isOpen = header?.classList.toggle("is-open");
-    burger.setAttribute("aria-expanded", String(isOpen));
-  });
-
-
   // === YouTube façade ===
   document.querySelectorAll<HTMLElement>(".yt-facade").forEach((facade) => {
     const ytId = facade.dataset.ytId;

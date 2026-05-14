@@ -16,7 +16,6 @@ function applyPhoneMask(input: HTMLInputElement) {
 export function initForms() {
   const forms = document.querySelectorAll<HTMLFormElement>('form[data-form-id]');
   forms.forEach((form) => {
-    // Prevent double-initialization
     if ((form as any).__formsInitialized) return;
     (form as any).__formsInitialized = true;
 
@@ -24,14 +23,13 @@ export function initForms() {
     const formId  = form.dataset.formId!;
     const project = form.dataset.project || window.location.hostname;
 
-    // Phone mask
     form.querySelectorAll<HTMLInputElement>('[name="telefone"]').forEach(applyPhoneMask);
-    
-    const apiUrl  = form.dataset.apiUrl ?? '';
-    const submitUrl = form.dataset.submitUrl || (apiUrl ? `${apiUrl}/submit` : null);
+
+    const apiUrl     = form.dataset.apiUrl ?? '';
+    const submitUrl  = form.dataset.submitUrl || (apiUrl ? `${apiUrl}/submit` : null);
     const redirectUrl = form.dataset.redirect;
-    const gridId    = form.dataset.gridId;
-    const successId = form.dataset.successId;
+    const gridId     = form.dataset.gridId;
+    const successId  = form.dataset.successId;
 
     if (!submitUrl) {
       console.warn(`[Forms] Formulário ${formId} sem URL de webhook (data-submit-url).`);
@@ -48,25 +46,23 @@ export function initForms() {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Honeypot check
       const hp = form.querySelector<HTMLInputElement>('[name="website"]');
       if (hp && hp.value) return;
 
       const submitBtn  = form.querySelector<HTMLButtonElement>('.form-submit, [type="submit"]');
       const btnText    = submitBtn?.querySelector<HTMLElement>('.btn-text');
       const btnLoading = submitBtn?.querySelector<HTMLElement>('.btn-loading');
-      
-      const msgEl = gridId 
-        ? document.getElementById(gridId)?.querySelector('[id$="FormMsg"]') as HTMLElement | null 
+
+      const msgEl = gridId
+        ? document.getElementById(gridId)?.querySelector('[id$="FormMsg"]') as HTMLElement | null
         : form.querySelector('.form-error') as HTMLElement | null;
 
       if (submitBtn) submitBtn.disabled = true;
-      
+
       if (btnText && btnLoading) {
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline-flex';
       } else if (submitBtn && !submitBtn.querySelector('.btn-loading')) {
-        // Fallback for raw HTML forms without the loading span
         const originalText = submitBtn.innerHTML;
         submitBtn.dataset.originalText = originalText;
         submitBtn.innerHTML = 'Enviando...';
@@ -74,19 +70,51 @@ export function initForms() {
 
       if (msgEl) msgEl.style.display = 'none';
 
+      // Coletar campos do formulário
       const formData = new FormData(form);
-      const data: Record<string, string> = {};
-      formData.forEach((v, k) => { if (k !== 'website') data[k] = v.toString(); });
+      const rawData: Record<string, string> = {};
+      formData.forEach((v, k) => { if (k !== 'website') rawData[k] = v.toString(); });
 
+      // Dados de tracking da sessão
       const trackingRaw = sessionStorage.getItem('dmove_tracking');
-      const tracking    = trackingRaw ? JSON.parse(trackingRaw) : {};
-      const firstVisit  = sessionStorage.getItem('dmove_first_visit') || '';
+      const tracking: Record<string, string> = trackingRaw ? JSON.parse(trackingRaw) : {};
 
-      const payload = {
-        project,
+      // Data e hora do envio
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('pt-BR');
+      const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+      // Capitalizar primeira letra de cada chave do formulário,
+      // exceto "fonte" que é usado para construir o campo Fonte com UTMs
+      const capitalizedFields: Record<string, string> = {};
+      let fonteBase = rawData['fonte'] || project;
+      Object.entries(rawData).forEach(([key, val]) => {
+        if (key === 'fonte') return;
+        const capKey = key.charAt(0).toUpperCase() + key.slice(1);
+        capitalizedFields[capKey] = val;
+      });
+
+      // Construir Fonte: valor do campo + parâmetros de tracking como query string
+      const trackingParamKeys = [
+        'utm_source', 'utm_medium', 'utm_campaign', 'utm_term',
+        'utm_content', 'utm_id', 'gclid', 'fbclid', 'ttclid', 'msclkid', 'sck',
+      ];
+      const qs = new URLSearchParams();
+      trackingParamKeys.forEach(k => { if (tracking[k]) qs.set(k, tracking[k]); });
+      const fonte = qs.toString() ? `${fonteBase}?${qs.toString()}` : fonteBase;
+
+      // Payload flat no formato esperado pelo n8n
+      const payload: Record<string, string> = {
+        ...capitalizedFields,
+        Fonte: fonte,
+        Data: dateStr,
+        'Horário': timeStr,
+        'URL da página': window.location.href,
+        'Agente de usuário': navigator.userAgent,
+        'IP remoto': '',
+        'Desenvolvido por': 'Dmove',
         form_id: formId,
-        data,
-        tracking: { ...tracking, first_visit: firstVisit, submitted_at: new Date().toISOString(), page_url: window.location.href },
+        form_name: formId,
       };
 
       try {
@@ -101,7 +129,7 @@ export function initForms() {
         let json: any = {};
         try { json = await res.json(); } catch {}
 
-        (window as any).dataLayer?.push({ event: 'form_submit', form_id: formId, project, ...data });
+        (window as any).dataLayer?.push({ event: 'form_submit', form_id: formId, project, ...capitalizedFields });
 
         const redir = redirectUrl || json.redirect;
         if (redir) {
@@ -109,7 +137,6 @@ export function initForms() {
           return;
         }
 
-        // Show success state
         const gridEl    = gridId    ? document.getElementById(gridId)    : null;
         const successEl = successId ? document.getElementById(successId) : null;
 
@@ -117,12 +144,11 @@ export function initForms() {
           gridEl.style.display = 'none';
           successEl.classList.add('active');
         } else {
-          // Replace form content with success message if no specific grid/success elements
           form.innerHTML = `
-            <div class="form-success" style="text-align: center; padding: 2rem;">
-              <div class="form-success-icon" style="width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; background: #2563eb; border-radius: 50%; font-size: 1.5rem; color: white;">✓</div>
-              <h3 class="form-success-title" style="font-size: 1.15rem; font-weight: 600; margin-bottom: 4px;">Enviado com sucesso!</h3>
-              <p class="form-success-text" style="color: #666; font-size: 0.9rem;">Em breve entraremos em contato.</p>
+            <div class="form-success" style="text-align:center;padding:2rem;">
+              <div style="width:56px;height:56px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;background:#2563eb;border-radius:50%;font-size:1.5rem;color:white;">✓</div>
+              <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:4px;">Enviado com sucesso!</h3>
+              <p style="color:#666;font-size:0.9rem;">Em breve entraremos em contato.</p>
             </div>`;
         }
       } catch (err: any) {
@@ -138,14 +164,13 @@ export function initForms() {
         if (submitBtn) {
           submitBtn.disabled = false;
           if (btnText && btnLoading) {
-             btnText.style.display = 'inline';
-             btnLoading.style.display = 'none';
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
           } else if (submitBtn.dataset.originalText) {
-             submitBtn.innerHTML = submitBtn.dataset.originalText;
+            submitBtn.innerHTML = submitBtn.dataset.originalText;
           }
         }
       }
     });
   });
 }
-

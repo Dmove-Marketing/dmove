@@ -115,44 +115,23 @@ p {
   align-items: center;
 }
 
-.site-header__menu {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.site-header__menu a {
+.site-header__cta {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 14px;
   color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
-  transition: color 0.2s;
+  letter-spacing: 0.05em;
+  background: var(--dmove-red);
+  padding: 10px 22px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.2s;
 }
 
-.site-header__menu a:hover {
-  color: #BF0404;
-}
-
-/* Burger mobile */
-.site-header__burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 20px 0;
-}
-
-.site-header__burger span {
-  display: block;
-  width: 26px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  transition: all 0.3s;
+.site-header__cta:hover {
+  background: var(--dmove-red-hover);
 }
 
 /* Ocultar nav quando UTM presente */
