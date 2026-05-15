@@ -17,6 +17,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
+  background-color: #0E0604; /* evita caixa preta no overscroll do iOS */
 }
 
 body {
