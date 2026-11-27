@@ -1,0 +1,265 @@
+---
+// Bio do Instagram da Dmove — página única e direta: chamada + formulário.
+// Sem links de saída. Usa o mesmo webhook e motor de formulário da home.
+import Base from '../layouts/Base.astro';
+import Img from '../components/ui/Img.astro';
+import config from '../../config.json';
+
+const formCfg = config.forms['lead-form'];
+
+// Mesmas opções da home (index.astro)
+const segmentos = [
+  'Espaço para eventos',
+  'Empresa de serviços para eventos',
+  'Hotel, bar ou restaurante que realiza eventos',
+  'Casa de shows ou balada',
+  'Agência de eventos',
+  'Outro',
+];
+
+const faturamentos = [
+  'Até 19 mil',
+  '20 a 49 mil',
+  '50 a 69 mil',
+  '70 a 99 mil',
+  '100 a 499 mil',
+  '500 mil a 1 milhão',
+  'Mais de 1 milhão',
+];
+---
+
+<Base
+  title="Bio · Dmove Marketing"
+  description="Preencha o formulário e a equipe da Dmove entra em contato para explicar os serviços para o seu negócio de eventos."
+  ogImage="https://eventos.dmove.com.br/images/bio-ig/og.jpg"
+  canonical="https://eventos.dmove.com.br/bio-ig/"
+  theme="dark"
+>
+  <link slot="head" rel="preload" href="/fonts/bio-ig/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link slot="head" rel="preload" href="/fonts/bio-ig/poppins-500.woff2" as="font" type="font/woff2" crossorigin />
+
+  <main class="bio">
+    <div class="bio-inner">
+      <Img class="bio-logo" src="bio-ig/logo-dmove.png" alt="Dmove Marketing" width={296} height={67} priority />
+
+      <h1 class="bio-title">
+        <span>Como entender melhor os serviços</span>{' '}
+        <strong>oferecidos pela Dmove?</strong>
+      </h1>
+
+      <p class="bio-sub">
+        Basta preencher o formulário abaixo que a nossa equipe vai entrar em contato com você.
+      </p>
+
+      <div id="bioFormGrid" class="bio-grid">
+        <form
+          class="bio-form"
+          data-form-id="dmove-bio-ig"
+          data-project="dmove"
+          data-submit-url={formCfg.webhooks[0]}
+          data-redirect={formCfg.redirect_on_success}
+          data-grid-id="bioFormGrid"
+          data-success-id="bioFormSuccess"
+          novalidate
+        >
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Nome" required />
+          </div>
+          <div class="field">
+            <label for="telefone">Telefone/WhatsApp</label>
+            <input id="telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Telefone/WhatsApp" required />
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="E-mail" required />
+          </div>
+          <div class="field">
+            <label for="empresa">Empresa ou @ do Instagram</label>
+            <input id="empresa" name="empresa" type="text" autocomplete="organization" placeholder="Empresa ou @ do Instagram" required />
+          </div>
+          <div class="field">
+            <label for="segmento">Seu segmento</label>
+            <select id="segmento" name="segmento" required>
+              <option value="" selected disabled>Seu segmento</option>
+              {segmentos.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="faturamento">Faturamento mensal da sua empresa</label>
+            <select id="faturamento" name="faturamento" required>
+              <option value="" selected disabled>Faturamento mensal da sua empresa?</option>
+              {faturamentos.map((f) => <option value={f}>{f}</option>)}
+            </select>
+          </div>
+
+          <input type="hidden" name="fonte" id="fonte" value="Bio Instagram" />
+          <div class="hp" aria-hidden="true">
+            <input type="text" id="dmove-bio-ig_website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <button type="submit" class="form-submit">
+            <span class="btn-text">Enviar solicitação</span>
+            <span class="btn-loading" style="display:none">Enviando…</span>
+          </button>
+
+          <p class="form-note">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Seus dados ficam seguros com a gente.
+          </p>
+
+          <p id="bioFormMsg" class="form-msg" role="alert" style="display:none"></p>
+        </form>
+      </div>
+
+      <div id="bioFormSuccess" class="bio-success" role="status">
+        <div class="check" aria-hidden="true">✓</div>
+        <h2>Recebemos sua solicitação</h2>
+        <p>A equipe da Dmove vai entrar em contato com você em breve.</p>
+      </div>
+
+      <footer class="bio-footer">
+        <Img class="bio-mark" src="bio-ig/simbolo-dmove.png" alt="" width={54} height={44} />
+        <span>Líder no setor de eventos</span>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    import { initForms } from '../scripts/forms.ts';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initForms);
+    } else {
+      initForms();
+    }
+  </script>
+</Base>
+
+<style is:global>
+  @font-face { font-family: 'Poppins'; font-weight: 300; font-style: normal; font-display: swap; src: url('/fonts/bio-ig/poppins-300.woff2') format('woff2'); }
+  @font-face { font-family: 'Poppins'; font-weight: 400; font-style: normal; font-display: swap; src: url('/fonts/bio-ig/poppins-400.woff2') format('woff2'); }
+  @font-face { font-family: 'Poppins'; font-weight: 500; font-style: normal; font-display: swap; src: url('/fonts/bio-ig/poppins-500.woff2') format('woff2'); }
+  @font-face { font-family: 'Poppins'; font-weight: 600; font-style: normal; font-display: swap; src: url('/fonts/bio-ig/poppins-600.woff2') format('woff2'); }
+</style>
+
+<style>
+  .bio {
+    --red: #c4121d;
+    --red-dark: #7d0a10;
+    --bio-font: 'Poppins', system-ui, sans-serif;
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    padding: clamp(28px, 5vh, 56px) 22px 28px;
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgba(196, 18, 29, 0.28), transparent 60%),
+      #0c0a0b;
+    color: #f4f1f1;
+    font-family: var(--bio-font);
+  }
+  .bio :where(h1, h2, p, input, select, button) { font-family: var(--bio-font); }
+  .bio-inner { width: 100%; max-width: 460px; display: flex; flex-direction: column; }
+  .bio-grid, .bio-success { margin-bottom: 48px; }
+
+  .bio :global(.bio-logo) { width: 148px; height: auto; margin-bottom: clamp(32px, 5vh, 48px); }
+
+  .bio-title {
+    margin: 0 0 16px;
+    font-size: clamp(1.55rem, 5.6vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+  .bio-title span { font-weight: 300; color: rgba(244, 241, 241, 0.72); }
+  .bio-title strong { font-weight: 600; color: #fff; }
+
+  .bio-sub {
+    margin: 0 0 32px;
+    max-width: none;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(244, 241, 241, 0.7);
+  }
+
+  .bio-form { display: flex; flex-direction: column; gap: 10px; }
+  .field label {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .field input,
+  .field select {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    font: 400 0.9rem/1 var(--bio-font);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .field input::placeholder { color: rgba(244, 241, 241, 0.45); }
+  .field select {
+    padding-right: 40px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23ffffff' stroke-opacity='.6' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+  .field select:invalid { color: rgba(244, 241, 241, 0.45); }
+  .field select option { color: #111; background: #fff; }
+  .field input:focus,
+  .field select:focus { border-color: var(--red); background-color: rgba(255, 255, 255, 0.08); }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
+
+  .form-submit {
+    margin-top: 8px;
+    height: 54px;
+    border: 0;
+    border-radius: 10px;
+    font: 500 1rem/1 var(--bio-font);
+    color: #fff;
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.2s;
+  }
+  .form-submit:hover { filter: brightness(1.12); }
+  .form-submit:active { transform: scale(0.99); }
+  .form-submit:disabled { opacity: 0.7; cursor: wait; }
+
+  .form-note {
+    margin: 6px 0 0;
+    max-width: none;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 0.8rem; font-weight: 300;
+    color: rgba(244, 241, 241, 0.5);
+  }
+
+  .form-msg { margin: 6px 0 0; font-size: 0.875rem; color: #ff8a8f; }
+
+  .bio-success { display: none; text-align: center; padding: 32px 0 8px; }
+  .bio-success:global(.active) { display: block; }
+  .bio-success .check {
+    width: 56px; height: 56px; margin: 0 auto 18px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    font-size: 1.4rem; color: #fff;
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+  }
+  .bio-success h2 { margin: 0 0 8px; font-size: 1.35rem; font-weight: 600; color: #fff; }
+  .bio-success p { margin: 0 auto; font-weight: 300; color: rgba(244, 241, 241, 0.7); }
+
+  .bio-footer {
+    margin-top: auto;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: 0.78rem; font-weight: 300; letter-spacing: 0.02em;
+    color: rgba(244, 241, 241, 0.42);
+  }
+  .bio :global(.bio-mark) { display: block; height: 22px; width: auto; flex: none; }
+</style>
